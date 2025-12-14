@@ -42,7 +42,7 @@ export default function PlayerList({ players }) {
 
   return (
     <div className="player-list-section">
-      <h2>Squad Members ({players.length})</h2>
+      <h2>Stack Members ({players.length})</h2>
       <div className="players-grid">
         {players.length === 0 ? (
           <div className="empty-state">

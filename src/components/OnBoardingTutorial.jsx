@@ -19,7 +19,7 @@ export default function OnboardingTutorial({ onComplete }) {
     },
     {
       title: "CREATE OR JOIN A ROOM",
-      description: "Create a new squad room and share the 6-digit code with your friends, or join an existing room using their code.",
+      description: "Create a new room and share the 6-digit code with your friends, or join an existing room using their code.",
       icon: (
         <svg className="w-16 h-16 text-[#00d4aa]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
@@ -46,7 +46,7 @@ export default function OnboardingTutorial({ onComplete }) {
     },
     {
       title: "READY TO PLAY!",
-      description: "That's it! Create your room now and start coordinating with your squad. Good luck, have fun!",
+      description: "That's it! Create your room now and start coordinating with your stack. Good luck, have fun!",
       icon: (
         <svg className="w-16 h-16 text-[#00d4aa]" fill="currentColor" viewBox="0 0 20 20">
           <path fillRule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />

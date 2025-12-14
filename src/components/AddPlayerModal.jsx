@@ -76,7 +76,7 @@ export default function AddPlayerModal({ roomId, onClose, onSuccess }) {
           <form onSubmit={handleSubmit} className="p-6 space-y-6">
             <div className="text-center mb-4">
               <p className="text-[#7a8a99] text-sm font-inter">
-                Enter your Valorant Riot ID to join the squad
+                Enter your Valorant Riot ID to join the stack
               </p>
             </div>
 

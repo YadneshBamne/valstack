@@ -160,7 +160,7 @@ const [roomRes, playersRes, slotsRes] = await Promise.all([
                   <div className="bg-[#0f1923] px-6 py-4 border-b border-[#ff4655] flex items-center justify-between">
                     <div className="flex items-center gap-3">
                       <div className="w-2 h-6 bg-[#ff4655]"></div>
-                      <h2 className="font-valorant text-xl text-white tracking-wider">SQUAD</h2>
+                      <h2 className="font-valorant text-xl text-white tracking-wider">Stack Members</h2>
                     </div>
                     <div className="px-3 py-1 bg-[#ff4655]/20 border border-[#ff4655]/50 rounded-full">
                       <span className="text-[#ff4655] font-valorant text-sm">{players.length}</span>
