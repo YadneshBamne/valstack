@@ -1,3 +1,6 @@
+import { Trophy } from "lucide-react";
+
+
 export default function PlayerCard({ player }) {
   const getRankColor = (rankName) => {
     const colors = {
