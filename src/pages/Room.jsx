@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 import AddPlayerModal from '../components/AddPlayerModal';
 import PlayerCard from '../components/PlayerCard';
 import TimeSlotCard from '../components/TimeSlotCard';
+import DateTimePicker from '../components/DateTimePicker';
 
 export default function Room() {
   const { roomId } = useParams();
@@ -14,8 +16,6 @@ export default function Room() {
   const [showAddPlayer, setShowAddPlayer] = useState(false);
   const [showAddSlot, setShowAddSlot] = useState(false);
   const [copied, setCopied] = useState(false);
-  const [newDate, setNewDate] = useState('');
-  const [newTime, setNewTime] = useState('');
 
   useEffect(() => {
     loadRoomData();
@@ -36,35 +36,54 @@ export default function Room() {
       setTimeSlots(slotsRes.data);
     } catch (error) {
       console.error('Failed to load room data', error);
+      if (error.response?.status === 404) {
+        toast.error('Room not found');
+        navigate('/');
+      } else {
+        toast.error('Failed to load room data');
+      }
     }
   };
 
   const copyRoomCode = () => {
     navigator.clipboard.writeText(roomId);
     setCopied(true);
+    toast.success('Room code copied to clipboard! 📋');
     setTimeout(() => setCopied(false), 2000);
   };
 
-  const addTimeSlot = async (e) => {
-    e.preventDefault();
+  const addTimeSlot = async (date, time) => {
+    const toastId = toast.loading('Adding game session...');
     try {
       await axios.post(`http://localhost:3000/api/rooms/${roomId}/timeslots`, {
-        date: newDate,
-        time: newTime
+        date,
+        time
       });
-      setNewDate('');
-      setNewTime('');
       setShowAddSlot(false);
+      toast.update(toastId, {
+        render: 'Session added successfully! 🎮',
+        type: 'success',
+        isLoading: false,
+        autoClose: 2000
+      });
       loadRoomData();
     } catch (error) {
-      alert('Failed to add time slot');
+      toast.update(toastId, {
+        render: 'Failed to add session',
+        type: 'error',
+        isLoading: false,
+        autoClose: 3000
+      });
     }
   };
 
   if (!room) {
     return (
       <div className="min-h-screen bg-[#0f1923] flex items-center justify-center">
-        <div className="text-white font-valorant text-2xl">LOADING...</div>
+        <div className="text-center">
+          <div className="inline-block animate-spin rounded-full h-12 w-12 border-4 border-[#00d4aa] border-t-transparent mb-4"></div>
+          <div className="text-white font-valorant text-2xl tracking-wider">LOADING...</div>
+        </div>
       </div>
     );
   }
@@ -176,35 +195,17 @@ export default function Room() {
                       onClick={() => setShowAddSlot(!showAddSlot)}
                       className="px-4 py-2 bg-[#00d4aa] hover:bg-[#00c29a] font-valorant text-sm tracking-wider text-[#0f1923] rounded transition-all"
                     >
-                      + ADD SLOT
+                      {showAddSlot ? '✕ CANCEL' : '+ ADD SLOT'}
                     </button>
                   </div>
 
-                  {/* Add Slot Form */}
+                  {/* Add Slot Form with Material-UI Picker */}
                   {showAddSlot && (
                     <div className="p-6 border-b border-[#2a3a47] bg-[#0f1923]/50">
-                      <form onSubmit={addTimeSlot} className="flex gap-4">
-                        <input
-                          type="date"
-                          value={newDate}
-                          onChange={(e) => setNewDate(e.target.value)}
-                          required
-                          className="flex-1 px-4 py-2 bg-[#0f1923] border border-[#2a3a47] rounded text-white focus:border-[#00d4aa] focus:outline-none"
-                        />
-                        <input
-                          type="time"
-                          value={newTime}
-                          onChange={(e) => setNewTime(e.target.value)}
-                          required
-                          className="flex-1 px-4 py-2 bg-[#0f1923] border border-[#2a3a47] rounded text-white focus:border-[#00d4aa] focus:outline-none"
-                        />
-                        <button
-                          type="submit"
-                          className="px-6 py-2 bg-[#00d4aa] hover:bg-[#00c29a] font-valorant text-sm tracking-wider text-[#0f1923] rounded transition-all"
-                        >
-                          ADD
-                        </button>
-                      </form>
+                      <DateTimePicker
+                        onSubmit={addTimeSlot}
+                        onCancel={() => setShowAddSlot(false)}
+                      />
                     </div>
                   )}
 

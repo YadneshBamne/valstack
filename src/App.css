@@ -1,0 +1,122 @@
+/* Custom Toastify Valorant Theme */
+.Toastify__toast {
+  background: #1a2733 !important;
+  border: 2px solid #2a3a47 !important;
+  border-radius: 8px !important;
+  font-family: 'Inter', sans-serif !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5) !important;
+}
+
+.Toastify__toast--success {
+  border-color: #00d4aa !important;
+}
+
+.Toastify__toast--error {
+  border-color: #ff4655 !important;
+}
+
+.Toastify__toast--info {
+  border-color: #7c4dff !important;
+}
+
+.Toastify__toast--warning {
+  border-color: #ffd700 !important;
+}
+
+.Toastify__progress-bar {
+  background: linear-gradient(90deg, #00d4aa, #00c29a) !important;
+}
+
+.Toastify__toast--success .Toastify__progress-bar {
+  background: linear-gradient(90deg, #00d4aa, #00c29a) !important;
+}
+
+.Toastify__toast--error .Toastify__progress-bar {
+  background: linear-gradient(90deg, #ff4655, #e63946) !important;
+}
+
+.Toastify__toast--info .Toastify__progress-bar {
+  background: linear-gradient(90deg, #7c4dff, #6a3de8) !important;
+}
+
+.Toastify__close-button {
+  color: #7a8a99 !important;
+  opacity: 0.7 !important;
+}
+
+.Toastify__close-button:hover {
+  color: #ffffff !important;
+  opacity: 1 !important;
+}
+
+
+
+/* Custom Scrollbar - Valorant Theme */
+
+/* For Webkit browsers (Chrome, Safari, Edge) */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0f1923;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #ff4655 0%, #e63946 100%);
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #e63946 0%, #bd1f2d 100%);
+  width: 10px;
+}
+
+::-webkit-scrollbar-thumb:active {
+  background: #ff4655;
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #ff4655 #0f1923;
+}
+
+/* Custom scrollbar for specific containers with cyan theme */
+.scrollbar-cyan::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #00d4aa 0%, #00c29a 100%);
+}
+
+.scrollbar-cyan::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #00c29a 0%, #00a080 100%);
+}
+
+.scrollbar-cyan {
+  scrollbar-color: #00d4aa #0f1923;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Hide scrollbar but keep functionality (optional for cleaner look) */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Thin scrollbar variant */
+.scrollbar-thin::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}

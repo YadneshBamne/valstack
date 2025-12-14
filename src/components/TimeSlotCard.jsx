@@ -13,9 +13,11 @@ export default function TimeSlotCard({ slot, players, onUpdate }) {
   const fetchVotes = async () => {
     try {
       const response = await axios.get(`http://localhost:3000/api/timeslots/${slot.id}/votes`);
-      setVotes(response.data);
+      console.log('Fetched votes:', response.data);
+      setVotes(response.data || []);
     } catch (error) {
-      console.error('Failed to fetch votes');
+      console.error('Failed to fetch votes:', error);
+      setVotes([]);
     }
   };
 
@@ -34,6 +36,7 @@ export default function TimeSlotCard({ slot, players, onUpdate }) {
       await fetchVotes();
       onUpdate();
     } catch (error) {
+      console.error('Failed to vote:', error);
       alert('Failed to vote');
     } finally {
       setLoading(false);
@@ -51,9 +54,12 @@ export default function TimeSlotCard({ slot, players, onUpdate }) {
     }
   };
 
-  // Filter players who voted
-  const availablePlayers = votes.filter(v => v.available === 1);
-  const unavailablePlayers = votes.filter(v => v.available === 0);
+  // Filter players who voted - handle both boolean and integer values
+  const availablePlayers = votes.filter(v => v.available === true || v.available === 1 || v.available === '1');
+  const unavailablePlayers = votes.filter(v => v.available === false || v.available === 0 || v.available === '0');
+
+  console.log('Available players:', availablePlayers);
+  console.log('Unavailable players:', unavailablePlayers);
 
   return (
     <div className="bg-[#0f1923] border border-[#2a3a47] rounded-lg p-6 hover:border-[#00d4aa]/50 transition-all relative group">
@@ -72,7 +78,7 @@ export default function TimeSlotCard({ slot, players, onUpdate }) {
       <div className="flex items-center justify-between mb-6">
         <div>
           <div className="font-valorant text-2xl text-white tracking-wider mb-1">
-            {new Date(slot.date).toLocaleDateString('en-US', { 
+            {new Date(slot.date + 'T00:00:00').toLocaleDateString('en-US', { 
               weekday: 'short', 
               month: 'short', 
               day: 'numeric' 
@@ -138,12 +144,13 @@ export default function TimeSlotCard({ slot, players, onUpdate }) {
             <div className="w-2 h-2 rounded-full bg-[#00d4aa]"></div>
             <span className="text-[#00d4aa] text-xs font-valorant tracking-wider">PLAYING ({availablePlayers.length})</span>
           </div>
-          <div className="space-y-2">
+          <div className="space-y-2 max-h-40 overflow-y-auto">
             {availablePlayers.length === 0 ? (
               <div className="text-[#4a5a67] text-xs italic">No one yet</div>
             ) : (
               availablePlayers.map((vote, idx) => (
-                <div key={idx} className="text-white text-xs font-inter bg-[#00d4aa]/10 px-2 py-1 rounded border border-[#00d4aa]/30">
+                <div key={idx} className="text-white text-xs font-inter bg-[#00d4aa]/10 px-2 py-1.5 rounded border border-[#00d4aa]/30 flex items-center gap-2">
+                  <div className="w-1.5 h-1.5 rounded-full bg-[#00d4aa]"></div>
                   {vote.player_name}
                 </div>
               ))
@@ -157,12 +164,13 @@ export default function TimeSlotCard({ slot, players, onUpdate }) {
             <div className="w-2 h-2 rounded-full bg-[#ff4655]"></div>
             <span className="text-[#ff4655] text-xs font-valorant tracking-wider">NOT PLAYING ({unavailablePlayers.length})</span>
           </div>
-          <div className="space-y-2">
+          <div className="space-y-2 max-h-40 overflow-y-auto">
             {unavailablePlayers.length === 0 ? (
               <div className="text-[#4a5a67] text-xs italic">No one yet</div>
             ) : (
               unavailablePlayers.map((vote, idx) => (
-                <div key={idx} className="text-white text-xs font-inter bg-[#ff4655]/10 px-2 py-1 rounded border border-[#ff4655]/30">
+                <div key={idx} className="text-white text-xs font-inter bg-[#ff4655]/10 px-2 py-1.5 rounded border border-[#ff4655]/30 flex items-center gap-2">
+                  <div className="w-1.5 h-1.5 rounded-full bg-[#ff4655]"></div>
                   {vote.player_name}
                 </div>
               ))
