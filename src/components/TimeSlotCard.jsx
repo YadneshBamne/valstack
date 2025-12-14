@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 import { API_URL } from '../config';
 
 export default function TimeSlotCard({ slot, players, onUpdate }) {
@@ -13,7 +14,8 @@ export default function TimeSlotCard({ slot, players, onUpdate }) {
 
   const fetchVotes = async () => {
     try {
-      const response = await axios.get(`${API_URL}/api/timeslots/${slotId}/votes`);
+      // FIX: Changed slotId to slot.id
+      const response = await axios.get(`${API_URL}/api/timeslots/${slot.id}/votes`);
       console.log('Fetched votes:', response.data);
       setVotes(response.data || []);
     } catch (error) {
@@ -24,34 +26,63 @@ export default function TimeSlotCard({ slot, players, onUpdate }) {
 
   const handleVote = async (available) => {
     if (!selectedPlayer) {
-      alert('Please select your player name first');
+      toast.error('Please select your player name first');
       return;
     }
 
     setLoading(true);
+    const toastId = toast.loading('Saving your vote...');
+    
     try {
       await axios.post(`${API_URL}/api/timeslots/${slot.id}/vote`, {
         playerName: selectedPlayer,
         available
       });
       await fetchVotes();
+      
+      toast.update(toastId, {
+        render: available ? "You're in! Let's play! 🎮" : 'Marked as unavailable',
+        type: 'success',
+        isLoading: false,
+        autoClose: 2000
+      });
+      
       onUpdate();
     } catch (error) {
       console.error('Failed to vote:', error);
-      alert('Failed to vote');
+      toast.update(toastId, {
+        render: 'Failed to save vote',
+        type: 'error',
+        isLoading: false,
+        autoClose: 3000
+      });
     } finally {
       setLoading(false);
     }
   };
 
   const handleDelete = async () => {
-    if (!confirm('Are you sure you want to delete this time slot?')) return;
+    const confirmed = window.confirm('Are you sure you want to delete this time slot?');
+    if (!confirmed) return;
 
+    const toastId = toast.loading('Deleting session...');
+    
     try {
       await axios.delete(`${API_URL}/api/timeslots/${slot.id}`);
+      toast.update(toastId, {
+        render: 'Session deleted successfully!',
+        type: 'success',
+        isLoading: false,
+        autoClose: 2000
+      });
       onUpdate();
     } catch (error) {
-      alert('Failed to delete time slot');
+      toast.update(toastId, {
+        render: 'Failed to delete session',
+        type: 'error',
+        isLoading: false,
+        autoClose: 3000
+      });
     }
   };
 
@@ -145,7 +176,7 @@ export default function TimeSlotCard({ slot, players, onUpdate }) {
             <div className="w-2 h-2 rounded-full bg-[#00d4aa]"></div>
             <span className="text-[#00d4aa] text-xs font-valorant tracking-wider">PLAYING ({availablePlayers.length})</span>
           </div>
-          <div className="space-y-2 max-h-40 overflow-y-auto">
+          <div className="space-y-2 max-h-40 overflow-y-auto scrollbar-thin">
             {availablePlayers.length === 0 ? (
               <div className="text-[#4a5a67] text-xs italic">No one yet</div>
             ) : (
@@ -165,7 +196,7 @@ export default function TimeSlotCard({ slot, players, onUpdate }) {
             <div className="w-2 h-2 rounded-full bg-[#ff4655]"></div>
             <span className="text-[#ff4655] text-xs font-valorant tracking-wider">NOT PLAYING ({unavailablePlayers.length})</span>
           </div>
-          <div className="space-y-2 max-h-40 overflow-y-auto">
+          <div className="space-y-2 max-h-40 overflow-y-auto scrollbar-thin">
             {unavailablePlayers.length === 0 ? (
               <div className="text-[#4a5a67] text-xs italic">No one yet</div>
             ) : (
