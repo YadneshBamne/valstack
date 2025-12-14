@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { API_URL } from '../config';
 
 export default function TimeSlotCard({ slot, players, onUpdate }) {
   const [selectedPlayer, setSelectedPlayer] = useState('');
@@ -12,7 +13,7 @@ export default function TimeSlotCard({ slot, players, onUpdate }) {
 
   const fetchVotes = async () => {
     try {
-      const response = await axios.get(`http://localhost:3000/api/timeslots/${slot.id}/votes`);
+      const response = await axios.get(`${API_URL}/api/timeslots/${slotId}/votes`);
       console.log('Fetched votes:', response.data);
       setVotes(response.data || []);
     } catch (error) {
@@ -29,7 +30,7 @@ export default function TimeSlotCard({ slot, players, onUpdate }) {
 
     setLoading(true);
     try {
-      await axios.post(`http://localhost:3000/api/timeslots/${slot.id}/vote`, {
+      await axios.post(`${API_URL}/api/timeslots/${slot.id}/vote`, {
         playerName: selectedPlayer,
         available
       });
@@ -47,7 +48,7 @@ export default function TimeSlotCard({ slot, players, onUpdate }) {
     if (!confirm('Are you sure you want to delete this time slot?')) return;
 
     try {
-      await axios.delete(`http://localhost:3000/api/timeslots/${slot.id}`);
+      await axios.delete(`${API_URL}/api/timeslots/${slot.id}`);
       onUpdate();
     } catch (error) {
       alert('Failed to delete time slot');

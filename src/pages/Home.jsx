@@ -4,6 +4,7 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import SplashScreen from '../components/SplashScreen';
 import OnboardingTutorial from '../components/OnBoardingTutorial';
+import { API_URL } from '../config';
 
 export default function Home() {
   const [showSplash, setShowSplash] = useState(true);
@@ -44,7 +45,7 @@ export default function Home() {
     const toastId = toast.loading('Creating squad room...');
     
     try {
-      const response = await axios.post('http://localhost:3000/api/rooms', {
+      const response = await axios.post(`${API_URL}/api/rooms`, {
         name: roomName
       });
       

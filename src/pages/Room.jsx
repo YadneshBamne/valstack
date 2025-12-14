@@ -6,6 +6,8 @@ import AddPlayerModal from '../components/AddPlayerModal';
 import PlayerCard from '../components/PlayerCard';
 import TimeSlotCard from '../components/TimeSlotCard';
 import DateTimePicker from '../components/DateTimePicker';
+import { API_URL } from '../config';
+
 
 export default function Room() {
   const { roomId } = useParams();
@@ -25,11 +27,11 @@ export default function Room() {
 
   const loadRoomData = async () => {
     try {
-      const [roomRes, playersRes, slotsRes] = await Promise.all([
-        axios.get(`http://localhost:3000/api/rooms/${roomId}`),
-        axios.get(`http://localhost:3000/api/rooms/${roomId}/players`),
-        axios.get(`http://localhost:3000/api/rooms/${roomId}/timeslots`)
-      ]);
+const [roomRes, playersRes, slotsRes] = await Promise.all([
+  axios.get(`${API_URL}/api/rooms/${roomId}`),
+  axios.get(`${API_URL}/api/rooms/${roomId}/players`),
+  axios.get(`${API_URL}/api/rooms/${roomId}/timeslots`)
+]);
 
       setRoom(roomRes.data);
       setPlayers(playersRes.data);
@@ -55,7 +57,7 @@ export default function Room() {
   const addTimeSlot = async (date, time) => {
     const toastId = toast.loading('Adding game session...');
     try {
-      await axios.post(`http://localhost:3000/api/rooms/${roomId}/timeslots`, {
+      await axios.post(`${API_URL}/api/rooms/${roomId}/timeslots`, {
         date,
         time
       });

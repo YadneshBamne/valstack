@@ -6,6 +6,20 @@ require('dotenv').config();
 
 const app = express();
 app.use(cors());
+
+app.use(cors({
+  origin: [
+    'http://localhost:5173',           // Local dev
+    'http://localhost:5174',           // Alternative local port
+    'https://bookmydepression.vercel.app',  // Your production frontend
+    /\.vercel\.app$/                   // All Vercel preview deployments
+  ],
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
+
+
 app.use(express.json());
 
 // Initialize Supabase client

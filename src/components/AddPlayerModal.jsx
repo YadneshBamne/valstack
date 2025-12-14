@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import { API_URL } from '../config';
 
 export default function AddPlayerModal({ roomId, onClose, onSuccess }) {
   const [gameName, setGameName] = useState('');
@@ -19,7 +20,7 @@ export default function AddPlayerModal({ roomId, onClose, onSuccess }) {
     const toastId = toast.loading('Fetching player data from Riot API...');
 
     try {
-      await axios.post(`http://localhost:3000/api/rooms/${roomId}/players`, {
+      await axios.post(`${API_URL}/api/rooms/${roomId}/players`, {
         gameName: gameName.trim(),
         tagLine: tagLine.trim()
       });

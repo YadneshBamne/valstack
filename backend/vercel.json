@@ -11,11 +11,5 @@
       "src": "/(.*)",
       "dest": "server.js"
     }
-  ],
-  "env": {
-    "RIOT_API_KEY": "@riot_api_key",
-    "HENRIK_API_KEY": "@henrik_api_key",
-    "SUPABASE_URL": "@supabase_url",
-    "SUPABASE_SERVICE_KEY": "@supabase_service_key"
-  }
+  ]
 }
