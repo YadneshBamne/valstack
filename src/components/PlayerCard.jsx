@@ -246,7 +246,7 @@ export default function PlayerCard({ player }) {
               </div>
 
               {/* Additional Stats Row */}
-              <div className="mt-3 pt-3 border-t border-[#2a3a47]/50">
+              {/* <div className="mt-3 pt-3 border-t border-[#2a3a47]/50">
                 <div className="flex justify-around text-xs">
                   <div className="text-center">
                     <span className="text-[#7a8a99]">Avg Kills: </span>
@@ -257,7 +257,7 @@ export default function PlayerCard({ player }) {
                     <span className="text-white font-mono">{player.avg_score}</span>
                   </div>
                 </div>
-              </div>
+              </div> */}
             </>
           )}
 
