@@ -119,9 +119,9 @@ export default function AddPlayerModal({ roomId, onClose, onSuccess }) {
                   className="flex-1 px-4 py-3 bg-[#0f1923] border-2 border-[#2a3a47] rounded text-white font-inter text-base focus:border-[#ff4655] focus:outline-none transition-all duration-200 placeholder:text-[#4a5a67] disabled:opacity-50"
                 />
               </div>
-              <p className="text-[#7a8a99] text-xs mt-2 font-inter">
+              {/* <p className="text-[#7a8a99] text-xs mt-2 font-inter">
                 Example: If your Riot ID is <span className="text-white">TenZ#SEN</span>, enter "TenZ" and "SEN"
-              </p>
+              </p> */}
             </div>
 
             {/* Info Box */}
