@@ -1,0 +1,194 @@
+.timeslot-section {
+  background: #1a2332;
+  padding: 1.5rem;
+  border-radius: 12px;
+  border: 2px solid #2a3544;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.section-header h2 {
+  color: #ff4655;
+  font-size: 1.3rem;
+}
+
+.add-slot-btn {
+  background: #2a3544;
+  color: #fff;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s;
+}
+
+.add-slot-btn:hover {
+  background: #3a4554;
+  transform: translateY(-2px);
+}
+
+.add-slot-form {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.add-slot-form input {
+  padding: 0.6rem 1rem;
+  border: 2px solid #2a3544;
+  border-radius: 8px;
+  background: #0f1923;
+  color: #fff;
+  font-size: 0.95rem;
+}
+
+.add-slot-form input:focus {
+  outline: none;
+  border-color: #ff4655;
+}
+
+.add-slot-form button {
+  background: #ff4655;
+  color: white;
+  border: none;
+  padding: 0.6rem 1.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s;
+}
+
+.add-slot-form button:hover {
+  background: #e63946;
+}
+
+.player-name-input {
+  margin-bottom: 1.5rem;
+}
+
+.player-name-input input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 2px solid #2a3544;
+  border-radius: 8px;
+  background: #0f1923;
+  color: #fff;
+  font-size: 1rem;
+}
+
+.player-name-input input:focus {
+  outline: none;
+  border-color: #ff4655;
+}
+
+.timeslots-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.timeslot-card {
+  background: #0f1923;
+  padding: 1.5rem;
+  border-radius: 8px;
+  border: 2px solid #2a3544;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  transition: all 0.3s;
+}
+
+.timeslot-card:hover {
+  border-color: #3a4554;
+}
+
+.timeslot-info h3 {
+  color: #fff;
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.timeslot-info p {
+  color: #b0b0b0;
+  font-size: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.vote-counts {
+  display: flex;
+  gap: 1.5rem;
+  font-size: 1rem;
+}
+
+.available-count {
+  color: #4caf50;
+  font-weight: 600;
+}
+
+.unavailable-count {
+  color: #f44336;
+  font-weight: 600;
+}
+
+.vote-actions {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.vote-btn {
+  padding: 0.6rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-size: 0.95rem;
+}
+
+.vote-btn.available {
+  background: #4caf50;
+  color: white;
+}
+
+.vote-btn.available:hover {
+  background: #45a049;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(76, 175, 80, 0.4);
+}
+
+.vote-btn.unavailable {
+  background: #f44336;
+  color: white;
+}
+
+.vote-btn.unavailable:hover {
+  background: #da190b;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(244, 67, 54, 0.4);
+}
+
+@media (max-width: 768px) {
+  .timeslot-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .vote-actions {
+    width: 100%;
+  }
+  
+  .vote-btn {
+    flex: 1;
+  }
+}

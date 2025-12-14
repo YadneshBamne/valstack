@@ -1,0 +1,289 @@
+.player-list-section {
+  background: #1a2332;
+  padding: 1.5rem;
+  border-radius: 12px;
+  border: 2px solid #2a3544;
+  min-height: 200px;
+}
+
+.player-list-section h2 {
+  color: #ff4655;
+  margin-bottom: 1.5rem;
+  font-size: 1.3rem;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 2rem;
+  color: #5a6c7d;
+  font-size: 0.95rem;
+}
+
+.players-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.player-card {
+  background: #0f1923;
+  padding: 1.25rem;
+  border-radius: 8px;
+  border: 2px solid #2a3544;
+  transition: all 0.3s;
+}
+
+.player-card:hover {
+  border-color: #ff4655;
+  transform: translateX(4px);
+}
+
+.player-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #2a3544;
+}
+
+.player-name {
+  color: #fff;
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.player-rank {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.rank-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.25rem 0.75rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.rank-rr {
+  color: #b0b0b0;
+  font-size: 0.85rem;
+  font-weight: 400;
+}
+
+.player-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.stat-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.35rem 0;
+}
+
+.stat-label {
+  color: #5a6c7d;
+  font-size: 0.85rem;
+}
+
+.stat-value {
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.stat-value.positive {
+  color: #4caf50;
+}
+
+.stat-value.negative {
+  color: #f44336;
+}
+
+.stat-info {
+  color: #5a6c7d;
+  font-size: 0.75rem;
+  margin-top: 0.5rem;
+  font-style: italic;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .player-card {
+    padding: 1rem;
+  }
+}
+
+
+.player-list-section {
+  background: #1a2332;
+  padding: 1.5rem;
+  border-radius: 12px;
+  border: 2px solid #2a3544;
+  min-height: 200px;
+}
+
+.player-list-section h2 {
+  color: #ff4655;
+  margin-bottom: 1.5rem;
+  font-size: 1.3rem;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 2rem;
+  color: #5a6c7d;
+  font-size: 0.95rem;
+}
+
+.players-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.player-card {
+  background: #0f1923;
+  padding: 1.25rem;
+  border-radius: 8px;
+  border: 2px solid #2a3544;
+  transition: all 0.3s;
+}
+
+.player-card:hover {
+  border-color: #ff4655;
+  transform: translateX(4px);
+  box-shadow: 0 4px 12px rgba(255, 70, 85, 0.2);
+}
+
+.player-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #2a3544;
+}
+
+.player-name {
+  color: #fff;
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.rank-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.player-rank {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.rank-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.3rem 0.75rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.rank-rr {
+  color: #b0b0b0;
+  font-size: 0.8rem;
+  font-weight: 400;
+}
+
+.peak-rank {
+  color: #ffd700;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.player-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.stat-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.35rem 0;
+}
+
+.stat-label {
+  color: #5a6c7d;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.stat-value {
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.stat-value .wins {
+  color: #4caf50;
+}
+
+.stat-value .losses {
+  color: #f44336;
+}
+
+.stat-value.positive {
+  color: #4caf50;
+}
+
+.stat-value.negative {
+  color: #f44336;
+}
+
+.stat-value.agent {
+  color: #ff4655;
+}
+
+.stat-info {
+  color: #5a6c7d;
+  font-size: 0.75rem;
+  margin-top: 0.5rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid #2a3544;
+  text-align: center;
+}
+
+.no-stats {
+  text-align: center;
+  padding: 1rem;
+  color: #5a6c7d;
+  font-size: 0.85rem;
+  font-style: italic;
+}
+
+@media (max-width: 768px) {
+  .player-card {
+    padding: 1rem;
+  }
+  
+  .player-name {
+    font-size: 1rem;
+  }
+}
