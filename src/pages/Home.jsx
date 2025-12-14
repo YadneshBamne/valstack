@@ -188,7 +188,7 @@ export default function Home() {
                       </label>
                       <input
                         type="text"
-                        placeholder="A B C D E F"
+                        placeholder="ABCDEF"
                         value={joinCode}
                         onChange={(e) => setJoinCode(e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 6))}
                         required
