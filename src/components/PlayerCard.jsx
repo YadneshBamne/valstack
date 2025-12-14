@@ -82,7 +82,7 @@ export default function PlayerCard({ player }) {
         
         {/* Agent Background (if available) */}
         {player.most_played_agent !== 'Unknown' && (
-          <div className="absolute top-0 right-0 w-36 h-36 opacity-30 overflow-hidden">
+          <div className="absolute top-0 right-0 w-36 h-36 opacity-50 overflow-hidden">
             <img
               src={getAgentImage(player.most_played_agent)}
               alt={player.most_played_agent}
