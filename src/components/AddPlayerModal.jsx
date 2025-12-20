@@ -17,13 +17,15 @@ export default function AddPlayerModal({ roomId, onClose, onSuccess }) {
     }
 
     setLoading(true);
-    const toastId = toast.loading('Fetching player data from Riot API...');
+    const toastId = toast.loading('Fetching player data from Henrik API...');
 
     try {
-      await axios.post(`${API_URL}/api/rooms/${roomId}/players`, {
+      const response = await axios.post(`${API_URL}/api/rooms/${roomId}/players`, {
         gameName: gameName.trim(),
         tagLine: tagLine.trim()
       });
+      
+      console.log('✅ Success response:', response.data);
       
       toast.update(toastId, {
         render: 'Player added successfully! 🎯',
@@ -35,16 +37,31 @@ export default function AddPlayerModal({ roomId, onClose, onSuccess }) {
       onSuccess();
       onClose();
     } catch (error) {
-      console.error('Error adding player:', error);
-      const message = error.response?.status === 404 
-        ? 'Riot ID not found. Check spelling!'
-        : 'Failed to add player. Try again!';
+      console.error('❌ Full error:', error);
+      console.error('❌ Error response:', error.response?.data);
+      console.error('❌ Error status:', error.response?.status);
+      
+      let message = 'Failed to add player. Try again!';
+      
+      if (error.response?.status === 404) {
+        message = 'Riot ID not found. Check spelling!';
+      } else if (error.response?.status === 409) {
+        message = 'Player already added to this room!';
+      } else if (error.response?.status === 429) {
+        message = 'Rate limited. Wait a moment and try again.';
+      } else if (error.response?.status === 504) {
+        message = 'Request timeout. Try again.';
+      } else if (error.response?.data?.error) {
+        message = error.response.data.error;
+      } else if (error.response?.data?.message) {
+        message = error.response.data.message;
+      }
       
       toast.update(toastId, {
         render: message,
         type: 'error',
         isLoading: false,
-        autoClose: 3000
+        autoClose: 4000
       });
     } finally {
       setLoading(false);
@@ -112,27 +129,14 @@ export default function AddPlayerModal({ roomId, onClose, onSuccess }) {
                   type="text"
                   placeholder="1005"
                   value={tagLine}
-                  onChange={(e) => setTagLine(e.target.value.toUpperCase())}
+                  onChange={(e) => setTagLine(e.target.value)}
                   required
                   maxLength={5}
                   disabled={loading}
                   className="flex-1 px-4 py-3 bg-[#0f1923] border-2 border-[#2a3a47] rounded text-white font-inter text-base focus:border-[#ff4655] focus:outline-none transition-all duration-200 placeholder:text-[#4a5a67] disabled:opacity-50"
                 />
               </div>
-              {/* <p className="text-[#7a8a99] text-xs mt-2 font-inter">
-                Example: If your Riot ID is <span className="text-white">TenZ#SEN</span>, enter "TenZ" and "SEN"
-              </p> */}
             </div>
-
-            {/* Info Box */}
-            {/* <div className="flex items-start gap-3 text-[#7a8a99] text-xs font-inter bg-[#0f1923]/50 px-4 py-3 rounded border-l-4 border-[#00d4aa]">
-              <svg className="w-5 h-5 flex-shrink-0 text-[#00d4aa] mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
-              </svg>
-              <span className="tracking-wider">
-                We'll automatically fetch your rank, stats, and match history from Riot's API
-              </span>
-            </div> */}
 
             {/* Action Buttons */}
             <div className="flex gap-3 pt-4">
